@@ -1,0 +1,11 @@
+.divLoader {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    opacity: 0.8;
+    background-color: #292929;
+    z-index: 9999;
+  }
