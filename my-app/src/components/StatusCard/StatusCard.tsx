@@ -28,12 +28,8 @@ interface StatsCardProps extends CardProps {
 
 const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 	const { apiName } = statsCardProps;
-	//This state contains data that comes from the API
 	const [healthStatusResponse, setHealthStatusResponse] =
 		useState<HealthStatusResponse>();
-
-	//This state contains the value to whether or not show the spinner while waiting for the API response. 
-	//This state is used only once when the app renders for the first time 
 	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const successMessage = healthStatusResponse?.success;
 
@@ -62,9 +58,9 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 	useEffect(() => {
 		if (apiName) {
 			setIsFetching(true);
-			fetchData(apiName,true);
+			fetchData(apiName, true);
 			let interval = setInterval(() => {
-				fetchData(apiName,true);
+				fetchData(apiName, true);
 			}, Number(refreshTime));
 
 			return () => clearInterval(interval);
