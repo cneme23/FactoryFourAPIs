@@ -1,0 +1,52 @@
+.StatusCard {
+	border-radius: 8px;
+	box-shadow: 5px 5px 5px 5px grey;
+	text-align: center;
+	height: 200px;
+	width: 300px;
+
+	h4 {
+		color: #3d3f42;
+		background-color: transparent;
+
+		@media (max-width: 1300px) {
+			font-size: 18px;
+		}
+		@media (max-width: 400px) {
+			font-size: 12px;
+		}
+	}
+	h5 {
+		@media (max-width: 1300px) {
+			font-size: 14px;
+		}
+		@media (max-width: 400px) {
+			font-size: 9px;
+		}
+	}
+	h3 {
+		@media (max-width: 1300px) {
+			font-size: 16px;
+		}
+		@media (max-width: 400px) {
+			font-size: 12px;
+		}
+	}
+}
+
+.SuccessCard {
+	[class*="card-title"] {
+		background-color: green;
+		color: white;
+	}
+}
+
+.DangerCard {
+	[class*="card-title"] {
+		background-color: red;
+		color: white;
+	}
+	[class*="card-subtitle"] {
+		color: red;
+	}
+}
