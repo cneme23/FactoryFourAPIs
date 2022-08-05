@@ -1,0 +1,15 @@
+.statusDashboard {
+	.statusHeaderDashboard {
+		background-color: rgb(9, 11, 19);
+		color: white;
+	}
+
+	[class*="custom-grid"] {
+		@media (min-width: 1700px) {
+			width: 20%;
+		}
+		@media (min-width: 1900px) {
+			width: 16%;
+		}
+	}
+}
