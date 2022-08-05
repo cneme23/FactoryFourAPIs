@@ -9,7 +9,6 @@ import {
 	CardSubtitle,
 } from "reactstrap";
 import React, { useState, useEffect } from "react";
-import styles from "./StatusCard.module.scss";
 import HealthStatusResponse from "../../models/healthStatusResponse";
 import CheckStatusApiService from "../../services/checkApiStatus.service";
 import { Config } from "../../config";
@@ -17,7 +16,10 @@ import { DateUtils } from "../../utils/DateUtils";
 import classnames from "classnames";
 import Loader from "components/Loader/Loader";
 import { AxiosResponse } from "axios";
+import { BiError } from 'react-icons/bi';
+import styles from "./StatusCard.module.scss";
 
+//API data refresh time. 
 const { refreshTime } = Config;
 
 interface StatsCardProps extends CardProps {
@@ -25,15 +27,17 @@ interface StatsCardProps extends CardProps {
 }
 
 const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
-	const { apiName, ...res } = statsCardProps;
-
+	const { apiName } = statsCardProps;
+	//This state contains data that comes from the API
 	const [healthStatusResponse, setHealthStatusResponse] =
 		useState<HealthStatusResponse>();
 
+	//This state contains the value to whether or not show the spinner while waiting for the API response. 
+	//This state is used only once when the app renders for the first time 
 	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const successMessage = healthStatusResponse?.success;
 
-	const fetchData = async (apiName: string) => {
+	const fetchData = async (apiName: string, isFirstCall: boolean) => {
 		try {
 			const response: AxiosResponse<HealthStatusResponse> =
 				await CheckStatusApiService.getStatus(apiName);
@@ -48,21 +52,19 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 			}
 			setHealthStatusResponse(errorDisplay);
 		} finally {
-			setIsFetching(false);
+			if (isFirstCall) {
+				setIsFetching(false);
+			}
 		}
 	};
 
-	const initProcess = async (apiName: string) => {
-		fetchData(apiName);
-	};
 
 	useEffect(() => {
 		if (apiName) {
 			setIsFetching(true);
-
-			initProcess(apiName);
+			fetchData(apiName,true);
 			let interval = setInterval(() => {
-				initProcess(apiName);
+				fetchData(apiName,true);
 			}, Number(refreshTime));
 
 			return () => clearInterval(interval);
@@ -76,13 +78,14 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 				styles.StatusCard,
 				successMessage ? styles.SuccessCard : styles.DangerCard
 			)}
-			{...res}
+
 		>
 			{!isFetching ? (
 				<>
 					<Col className="col-12">
 						<CardHeader tag="h4" className="d-inline-flex border-bottom-0">
 							{apiName?.toUpperCase()}
+							{!successMessage && <BiError className={(styles.ErrorIcon)} />}
 						</CardHeader>
 					</Col>
 					<CardBody>
@@ -103,7 +106,7 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 						{!successMessage && (
 							<Col className="col-12">
 								<CardSubtitle tag={"h5"} className="mb-2">
-									ERROR
+									<p className={classnames(styles.BlinkText)}>ERROR</p>
 								</CardSubtitle>
 							</Col>
 						)}

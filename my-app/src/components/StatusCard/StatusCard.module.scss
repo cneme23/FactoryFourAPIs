@@ -50,3 +50,19 @@
 		color: red;
 	}
 }
+
+.ErrorIcon {
+	color: red;
+	font-size: 1em;
+	margin-left: 5px;
+}
+
+.BlinkText {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
