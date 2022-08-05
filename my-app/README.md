@@ -1,10 +1,8 @@
-
 # <div align="center">📋 Factory Four API Dashboard App</div>
-
 <a href="https://api-status-viewer.netlify.app/">
 <img src="./appFoto1.PNG"/>
                              </a>
-<p align="center">This is an APIs´ status dashboard app that allows you to check the conectivity status to the factoryfour practise API  </p>
+<p align="center">This is an APIs´ status dashboard app that allows you to check the conectivity status to the factoryFour API  </p>
 
 ## 🛠️ Technologies
 
