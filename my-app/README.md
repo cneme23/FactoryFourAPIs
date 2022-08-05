@@ -4,7 +4,7 @@
 <a href="https://api-status-viewer.netlify.app/">
 <img src="./appFoto1.PNG"/>
                              </a>
-<p align="center">This is an APIs´ status dashboard app that allows you to check the conectivity status to the factoryfour practise API  </p>
+<p align="center">This is an APIs´ status dashboard app that allows you to check the conectivity status to the factoryFour API  </p>
 
 ## 🛠️ Technologies
 
@@ -29,7 +29,7 @@
 $ git clone https://github.com/cneme23/FactoryFourAPIs.git
 $ cd FactoryFourAPIs/my-app
 $ npm install
-$ yarn start
+$ npm start
 ```
 
 The application will open in the browser on http://localhost:3000
