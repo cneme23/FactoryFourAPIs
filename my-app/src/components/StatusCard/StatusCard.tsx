@@ -15,7 +15,6 @@ import CheckStatusApiService from "../../services/checkApiStatus.service";
 import { Config } from "../../config";
 import { DateUtils } from "../../utils/DateUtils";
 import classnames from "classnames";
-
 import Loader from "components/Loader/Loader";
 import { AxiosResponse } from "axios";
 
