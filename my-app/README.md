@@ -29,7 +29,9 @@
 
 ```
 $ If you want to change the time interval for displaying the 
-most recent result for each API, you have to change the value of the global variable: "REACT_APP_REFRESH_API_TIME" located in the .env file which is placed in the project´s root. 
+most recent result for each API, you have to change the value of the global variable:
+"REACT_APP_REFRESH_API_TIME" located in the .env file which is placed in the project´s root. 
+
 ```
 
 
