@@ -65,7 +65,6 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 
 			return () => clearInterval(interval);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

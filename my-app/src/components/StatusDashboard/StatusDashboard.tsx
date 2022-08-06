@@ -5,7 +5,6 @@ import StatusCard from "components/StatusCard/StatusCard";
 import styles from "./StatusDashboard.module.scss";
 import classNames from "classnames";
 
-//This component its encharged of renderizing each single card.
 const statusDashboard: React.FC = () => {
 	return (
 		<Card className={classNames(styles.statusDashboard, "border-0 p-0")}>
