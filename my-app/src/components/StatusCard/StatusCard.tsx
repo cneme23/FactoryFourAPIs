@@ -30,9 +30,7 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 	const { apiName } = statsCardProps;
 	const [healthStatusResponse, setHealthStatusResponse] =
 		useState<HealthStatusResponse>();
-	const [isFetching, setIsFetching] = useState<boolean>(false);
-	const successMessage = healthStatusResponse?.success;
-
+	const [isFetching, setIsFetching] = useState<boolean>(true);
 	const fetchData = async (apiName: string, isFirstCall: boolean) => {
 		try {
 			const response: AxiosResponse<HealthStatusResponse> =
@@ -57,7 +55,6 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 
 	useEffect(() => {
 		if (apiName) {
-			setIsFetching(true);
 			fetchData(apiName, true);
 			let interval = setInterval(() => {
 				fetchData(apiName, true);
@@ -71,7 +68,7 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 		<Card
 			className={classnames(
 				styles.StatusCard,
-				successMessage ? styles.SuccessCard : styles.DangerCard
+				healthStatusResponse?.success ? styles.SuccessCard : styles.DangerCard
 			)}
 
 		>
@@ -80,17 +77,17 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 					<Col className="col-12">
 						<CardHeader tag="h4" className="d-inline-flex border-bottom-0">
 							{apiName?.toUpperCase()}
-							{!successMessage && <BiError className={(styles.ErrorIcon)} />}
+							{!healthStatusResponse?.success && <BiError className={(styles.ErrorIcon)} />}
 						</CardHeader>
 					</Col>
 					<CardBody>
 						<Col className="col-12">
-							<CardTitle className="mb-2" tag={successMessage ? "h5" : "h3"}>
-								{!successMessage && "Status: "}
+							<CardTitle className="mb-2" tag={healthStatusResponse?.success ? "h5" : "h3"}>
+								{!healthStatusResponse?.success && "Status: "}
 								{healthStatusResponse?.message}
 							</CardTitle>
 						</Col>
-						{successMessage && (
+						{healthStatusResponse?.success && (
 							<Col className="col-12">
 								<CardSubtitle tag={"h5"} className="mb-2">
 									<b>Host: </b>
@@ -98,7 +95,7 @@ const StatusCard: React.FC<StatsCardProps> = (statsCardProps) => {
 								</CardSubtitle>
 							</Col>
 						)}
-						{!successMessage && (
+						{!healthStatusResponse?.success && (
 							<Col className="col-12">
 								<CardSubtitle tag={"h5"} className="mb-2">
 									<p className={classnames(styles.BlinkText)}>ERROR</p>
